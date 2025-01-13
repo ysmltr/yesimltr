@@ -1,6 +1,5 @@
 backend:
   name: git-getaway
-  repo: ysmltr/yesimltr
   branch: main
 
 media_folder: "images/uploads"
