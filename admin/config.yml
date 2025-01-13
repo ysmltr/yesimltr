@@ -1,6 +1,6 @@
 backend:
-  name: github
-  repo: ysmltr/yesimltr  # senin GitHub kullanıcı adın ve repo adın
+  name: github-getaway
+  repo: ysmltr/yesimltr
   branch: main
 
 media_folder: "images/uploads"
