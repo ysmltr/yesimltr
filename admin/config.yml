@@ -1,5 +1,5 @@
 backend:
-  name: github-getaway
+  name: git-getaway
   repo: ysmltr/yesimltr
   branch: main
 
