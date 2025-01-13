@@ -1,34 +1,17 @@
 backend:
   name: github
-  repo: username/repo-name
+  repo: https://github.com/ysmltr/yesimltr  # senin GitHub kullanıcı adın ve repo adın
   branch: main
 
 media_folder: "images/uploads"
 
 collections:
-  - name: "now"
-    label: "Now Page"
-    files:
-      - name: "now"
-        label: "Now Content"
-        file: "_data/now.json"
-        fields:
-          - {label: "Last Updated", name: "lastUpdated", widget: "datetime"}
-          - label: "Content"
-            name: "content"
-            widget: "list"
-            fields:
-              - {label: "Text", name: "text", widget: "text"}
-              - {label: "Type", name: "type", widget: "select", options: ["paragraph", "link"]}
-
-  - name: "settings"
-    label: "Settings"
-    files:
-      - name: "info"
-        label: "Personal Info"
-        file: "_data/info.json"
-        fields:
-          - {label: "Name", name: "name", widget: "string"}
-          - {label: "Title", name: "title", widget: "string"}
-          - {label: "Company", name: "company", widget: "string"}
-          - {label: "Bio", name: "bio", widget: "text"}
+  - name: "bookmarks"
+    label: "Bookmarks"
+    folder: "_data/bookmarks"
+    create: true
+    format: "json"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "URL", name: "url", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
