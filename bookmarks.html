@@ -15,8 +15,8 @@
             Last updated: <span id="lastUpdated"></span>
         </div>
 
-        <div class="text-gray-500 space-y-6" id="bookmarksContent">
-            <!-- Bookmarks buraya dinamik olarak gelecek -->
+        <div class="space-y-8" id="bookmarks-list">
+            <!-- Bookmarks buraya dinamik olarak yüklenecek -->
         </div>
 
         <div class="mt-10">
@@ -24,6 +24,31 @@
         </div>
     </div>
 
-    <script src="js/bookmarks.js"></script>
+    <script>
+        // Bookmarkları yükle
+        fetch('_data/bookmarks.json')
+            .then(response => response.json())
+            .then(data => {
+                const bookmarksList = document.getElementById('bookmarks-list');
+                const lastUpdated = document.getElementById('lastUpdated');
+                
+                // Son güncelleme tarihini ayarla
+                if (data.length > 0) {
+                    lastUpdated.textContent = new Date(data[0].date).toLocaleDateString();
+                }
+
+                // Bookmarkları listele
+                data.forEach(bookmark => {
+                    bookmarksList.innerHTML += `
+                        <div class="bookmark">
+                            <div class="text-sm text-gray-500">${new Date(bookmark.date).toLocaleDateString()}</div>
+                            <a href="${bookmark.url}" class="text-blue-600 hover:underline">${bookmark.title}</a>
+                            ${bookmark.note ? `<p class="text-gray-600 mt-2">${bookmark.note}</p>` : ''}
+                        </div>
+                    `;
+                });
+            })
+            .catch(error => console.error('Error loading bookmarks:', error));
+    </script>
 </body>
 </html>
