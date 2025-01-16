@@ -11,35 +11,62 @@
     <div class="max-w-2xl mx-auto px-4 py-20">
         <h1 class="text-4xl font-bold text-gray-800 mb-6">Yeşim İlter / Bookmarks</h1>
         
-        <div class="text-sm text-gray-500 mb-8">
-            Last updated: <span id="lastUpdated"></span>
-        </div>
-
         <div class="space-y-8" id="bookmarks-list">
-            <!-- Bookmarks buraya dinamik olarak yüklenecek -->
+            <!-- Bookmarks buraya gelecek -->
         </div>
 
         <div class="mt-10">
             <a href="/" class="text-blue-600 hover:underline">← Back home</a>
         </div>
     </div>
+
     <script>
-        fetch('/bookmarks.json')  // URL'i değiştirdik
-            .then(response => response.json())
-            .then(data => {
+        // Tüm bookmark dosyalarını al
+        async function getBookmarks() {
+            try {
+                const response = await fetch('https://api.github.com/repos/ysmltr/yesimltr/contents/_data/bookmarks');
+                const files = await response.json();
+                
                 const bookmarksList = document.getElementById('bookmarks-list');
                 
-                data.bookmarks.forEach(bookmark => {  // data.bookmarks ekledik
-                    const div = document.createElement('div');
-                    div.className = 'mb-6';
-                    div.innerHTML = `
-                        <div class="text-sm text-gray-500">${new Date(bookmark.date).toLocaleDateString()}</div>
-                        <a href="${bookmark.url}" class="text-blue-600 hover:underline">${bookmark.title}</a>
-                    `;
-                    bookmarksList.appendChild(div);
+                // Her bookmark dosyası için
+                for (const file of files) {
+                    if (file.name.endsWith('.json')) {
+                        const bookmarkResponse = await fetch(file.download_url);
+                        const bookmark = await bookmarkResponse.json();
+                        
+                        // Bookmark'ı ekrana ekle
+                        const div = document.createElement('div');
+                        div.className = 'bookmark-item mb-6';
+                        div.innerHTML = `
+                            <div class="text-sm text-gray-500">${new Date(bookmark.date).toLocaleDateString()}</div>
+                            <a href="${bookmark.url}" class="text-blue-600 hover:underline" target="_blank">
+                                ${bookmark.title}
+                            </a>
+                        `;
+                        bookmarksList.appendChild(div);
+                    }
+                }
+                
+                // Tarihe göre sırala
+                const items = Array.from(bookmarksList.children);
+                items.sort((a, b) => {
+                    const dateA = new Date(a.querySelector('.text-gray-500').textContent);
+                    const dateB = new Date(b.querySelector('.text-gray-500').textContent);
+                    return dateB - dateA;
                 });
-            })
-            .catch(error => console.error('Error:', error));
+                
+                // Sıralanmış elemanları tekrar ekle
+                bookmarksList.innerHTML = '';
+                items.forEach(item => bookmarksList.appendChild(item));
+                
+            } catch (error) {
+                console.error('Error loading bookmarks:', error);
+            }
+        }
+
+        // Fonksiyonu çağır
+        getBookmarks();
     </script>
 </body>
 </html>
