@@ -23,32 +23,23 @@
             <a href="/" class="text-blue-600 hover:underline">← Back home</a>
         </div>
     </div>
-
     <script>
-        // Bookmarkları yükle
-        fetch('_data/bookmarks.json')
+        fetch('/bookmarks.json')  // URL'i değiştirdik
             .then(response => response.json())
             .then(data => {
                 const bookmarksList = document.getElementById('bookmarks-list');
-                const lastUpdated = document.getElementById('lastUpdated');
                 
-                // Son güncelleme tarihini ayarla
-                if (data.length > 0) {
-                    lastUpdated.textContent = new Date(data[0].date).toLocaleDateString();
-                }
-
-                // Bookmarkları listele
-                data.forEach(bookmark => {
-                    bookmarksList.innerHTML += `
-                        <div class="bookmark">
-                            <div class="text-sm text-gray-500">${new Date(bookmark.date).toLocaleDateString()}</div>
-                            <a href="${bookmark.url}" class="text-blue-600 hover:underline">${bookmark.title}</a>
-                            ${bookmark.note ? `<p class="text-gray-600 mt-2">${bookmark.note}</p>` : ''}
-                        </div>
+                data.bookmarks.forEach(bookmark => {  // data.bookmarks ekledik
+                    const div = document.createElement('div');
+                    div.className = 'mb-6';
+                    div.innerHTML = `
+                        <div class="text-sm text-gray-500">${new Date(bookmark.date).toLocaleDateString()}</div>
+                        <a href="${bookmark.url}" class="text-blue-600 hover:underline">${bookmark.title}</a>
                     `;
+                    bookmarksList.appendChild(div);
                 });
             })
-            .catch(error => console.error('Error loading bookmarks:', error));
+            .catch(error => console.error('Error:', error));
     </script>
 </body>
 </html>
