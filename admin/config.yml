@@ -9,8 +9,9 @@ media_folder: "images/uploads"
 collections:
   - name: "bookmarks"
     label: "Bookmarks"
-    folder: "_data"
+    folder: "_data/bookmarks"   
     create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" 
     format: "json"
     fields:
       - {label: "Title", name: "title", widget: "string"}
