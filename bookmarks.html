@@ -9,7 +9,10 @@
 </head>
 <body class="bg-white text-xl">
     <div class="max-w-2xl mx-auto px-4 py-20">
-        <h1 class="text-4xl font-bold text-gray-800 mb-6">Yeşim İlter / Bookmarks</h1>
+        <h1 class="text-4xl font-bold text-gray-800 mb-6">Bookmarks</h1>
+        <p class="text-md text-gray-500 mb-8">Bu alan, ilgimi çeken konuları, 
+            kendi ürettiğim içerikleri ve geliştirdiğim uygulamaları paylaşacağım bir platform olacak. 
+            İçerik konusunda herhangi bir kısıtlama olmayacak.</p>
         
         <div class="space-y-8" id="bookmarks-list">
             <!-- Bookmarks buraya gelecek -->
@@ -56,7 +59,6 @@
                     return dateB - dateA;
                 });
                 
-                // Sıralanmış elemanları tekrar ekle
                 bookmarksList.innerHTML = '';
                 items.forEach(item => bookmarksList.appendChild(item));
                 
@@ -65,7 +67,6 @@
             }
         }
 
-        // Fonksiyonu çağır
         getBookmarks();
     </script>
 </body>
