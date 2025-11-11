@@ -1,0 +1,50 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 3px;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+.masonry {
+  column-count: 4;      /* masaüstünde 4 sütun */
+  column-gap: 12px;     /* sütun arası boşluk */
+  padding: 12px;        /* sayfa kenar boşluğu */
+  width: 100%;
+}
+
+.masonry img {
+  width: 100%;          /* sütuna tam oturur */
+  display: block;       /* boşlukları kaldırır */
+  border-radius: 10px;
+  margin-bottom: 12px;  /* alt boşluk */
+  object-fit: cover;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+
+.masonry img:hover {
+  transform: scale(1.03);
+}
+
+/* responsive */
+@media (max-width: 1000px) {
+  .masonry {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 700px) {
+  .masonry {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 500px) {
+  .masonry {
+    column-count: 1;
+  }
+}
