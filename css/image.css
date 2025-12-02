@@ -10,17 +10,17 @@ html, body {
 }
 
 .masonry {
-  column-count: 4;      /* masaüstünde 4 sütun */
-  column-gap: 12px;     /* sütun arası boşluk */
-  padding: 12px;        /* sayfa kenar boşluğu */
+  column-count: 4;      
+  column-gap: 12px;     
+  padding: 12px;        
   width: 100%;
 }
 
 .masonry img {
-  width: 100%;          /* sütuna tam oturur */
-  display: block;       /* boşlukları kaldırır */
+  width: 100%;          
+  display: block;       
   border-radius: 10px;
-  margin-bottom: 12px;  /* alt boşluk */
+  margin-bottom: 12px;  
   object-fit: cover;
   box-shadow: 0 8px 16px rgba(0,0,0,0.3);
   transition: transform 0.2s ease;
